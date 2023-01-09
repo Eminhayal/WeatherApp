@@ -1,0 +1,20 @@
+PODS:
+  - Bagel (1.3.2):
+    - CocoaAsyncSocket
+  - CocoaAsyncSocket (7.6.5)
+
+DEPENDENCIES:
+  - Bagel (~> 1.3.2)
+
+SPEC REPOS:
+  trunk:
+    - Bagel
+    - CocoaAsyncSocket
+
+SPEC CHECKSUMS:
+  Bagel: 199e0105ac694d6eee9db54dd006c940da6ce81b
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+
+PODFILE CHECKSUM: 2382ec42c08d2f0546262cc54bdc550e33e1ea4c
+
+COCOAPODS: 1.11.3
