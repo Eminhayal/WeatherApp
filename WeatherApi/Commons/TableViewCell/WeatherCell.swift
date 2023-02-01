@@ -33,9 +33,10 @@ class WeatherCell: UITableViewCell {
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
+        collectionView.isScrollEnabled = true
+        collectionView.backgroundColor = .clear
         return collectionView
         }()
     
@@ -51,6 +52,7 @@ class WeatherCell: UITableViewCell {
     }()
     
     var weatherData : [Timeline]?
+    var weatherInterval: [Interval]?
     let date = Date()
     let calendar = Calendar.current
 
@@ -69,13 +71,34 @@ class WeatherCell: UITableViewCell {
         
     }
     
+    func configureData(data: [Timeline]) {
+        data.forEach { data in
+            self.weatherInterval = data.intervals
+            self.timeStepLabel.text = data.timestep
+        }
+        
+        data.forEach { timeline in
+            timeline.intervals?.forEach({ interval in
+                if let tempData = interval.values?.temperature {
+                    let temp = Int(tempData)
+                    self.temperatureLabel.text = "\(temp)  °C"
+                }
+            })
+        }
+        
+        let hour = self.calendar.component(.hour, from: self.date)
+        let minutes = self.calendar.component(.minute, from: self.date)
+        clockLabel.text = "\(hour) : \(minutes)"
+        
+    }
+    
     private func layout() {
         //MARK: collectionview
         contentView.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-10)
             make.height.equalTo(50)
         }
         //MARK: Temperature
@@ -106,30 +129,36 @@ class WeatherCell: UITableViewCell {
          }
     }
     
-    func setupData (data : Interval ) {
-        let hour = self.calendar.component(.hour, from: self.date)
-        let minutes = self.calendar.component(.minute, from: self.date)
-        if let data = data.values?.temperature {
-            let temperature = Int(data)
-            self.temperatureLabel.text = " \(String(temperature)) °C "
-        }
-        clockLabel.text = "\(hour) : \(minutes)"
-    }
 }
 
 extension WeatherCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 100, height: 50)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        var count = 0
+        weatherData?.forEach({ data in
+            data.intervals?.forEach({ dataInterval in
+                count += 1
+            })
+        })
+        return count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.identifier, for: indexPath) as! WeatherCollectionViewCell
         cell.backgroundColor = .clear
-        if let data = weatherData {
-            cell.tempData = data[indexPath.row].intervals ?? []
+        
+        if let data = weatherInterval {
+            if let tempData = data[indexPath.row].values?.temperature {
+                let tempValue = Int(tempData)
+                cell.tempLabel.text = "\(tempData.rounded()) °C  "
+
+            }
+            cell.timeLabel.text = weatherInterval?[indexPath.row].startTime
+            if let interval = weatherInterval {
+                cell.configureData(tempData: interval[indexPath.row])
+            }
         }
         return cell
     }

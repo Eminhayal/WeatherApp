@@ -14,10 +14,11 @@ final class AppRouter {
     
     init() {}
     
-//    func showDetailPage(_ navigationController: UINavigationController?, pokemonDetailURL: String) {
-//        let vc = DetailFlowVC.instantiate()
-//        let vm = DetailFlowVM(url: pokemonDetailURL)
-//        vc.viewModel = vm
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
+    func showDetailPage(_ navigationController: UINavigationController?, weatherData: Weather) {
+        let vc = DetailVC.instantiate()
+        let vm = DetailVM()
+        vc.weatherData = weatherData
+        vc.viewModel = vm
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

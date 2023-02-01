@@ -6,24 +6,56 @@
 //
 
 import UIKit
+import SnapKit
 
 class DetailVC: UIViewController {
-
+    
+    var viewModel: DetailVM?
+    
+    lazy var weatherLabel: UILabel = {
+        var weatherLabel = UILabel()
+        return weatherLabel
+    }()
+    
+    lazy var testMessageLabel: UILabel = {
+        var testMessageLabel = UILabel()
+        testMessageLabel.text = "Test Ekranı"
+        return testMessageLabel
+    }()
+    
+    var weatherData: Weather?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configureData()
+        layout()
     }
     
+    func configureData() {
+        
+        var data = weatherData?.data?.timelines?.first
+        if let dataWeather =  data?.intervals?.first?.values?.temperature {
+            var dataInt = Int( dataWeather)
+            weatherLabel.text = "\(dataInt)"
+        }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
+    
+    func layout() {
+        view.addSubview(weatherLabel)
+        weatherLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        view.addSubview(testMessageLabel)
+        testMessageLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-200)
+            make.leading.equalToSuperview().offset(200)
+        }
+    }
+    
+}
 
+extension DetailVC: StoryboardInstantiate {
+    static var storyboardType: StoryboardType { return .detail }
 }

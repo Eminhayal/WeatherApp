@@ -9,6 +9,7 @@ import UIKit
 
 enum StoryboardType: String {
     case home = "Main"
+    case detail = "Detail"
 }
 
 protocol StoryboardInstantiate {
