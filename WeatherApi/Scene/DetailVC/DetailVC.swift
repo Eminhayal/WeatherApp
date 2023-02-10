@@ -12,9 +12,9 @@ class DetailVC: UIViewController {
     
     var viewModel: DetailVM?
     
-    lazy var weatherLabel: UILabel = {
-        var weatherLabel = UILabel()
-        return weatherLabel
+    lazy var temperatureLabel: UILabel = {
+        var temperatureLabel = UILabel()
+        return temperatureLabel
     }()
     
     lazy var testMessageLabel: UILabel = {
@@ -29,21 +29,23 @@ class DetailVC: UIViewController {
         super.viewDidLoad()
         configureData()
         layout()
+        DetailVC.instantiate()
     }
     
     func configureData() {
         
+        
         var data = weatherData?.data?.timelines?.first
         if let dataWeather =  data?.intervals?.first?.values?.temperature {
             var dataInt = Int( dataWeather)
-            weatherLabel.text = "\(dataInt)"
+            temperatureLabel.text = "\(dataInt)"
         }
 
     }
     
     func layout() {
-        view.addSubview(weatherLabel)
-        weatherLabel.snp.makeConstraints { make in
+        view.addSubview(temperatureLabel)
+        temperatureLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         
@@ -56,6 +58,3 @@ class DetailVC: UIViewController {
     
 }
 
-extension DetailVC: StoryboardInstantiate {
-    static var storyboardType: StoryboardType { return .detail }
-}

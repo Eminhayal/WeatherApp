@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8CB8D37D2986D6950074ECFE /* DetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8D37C2986D6950074ECFE /* DetailVM.swift */; };
 		8CB8D37F2986D6B00074ECFE /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8D37E2986D6B00074ECFE /* DetailVC.swift */; };
-		8CB8D3812986D6B90074ECFE /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CB8D3802986D6B90074ECFE /* Detail.storyboard */; };
+		8CB8D383298EA0860074ECFE /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CB8D382298EA0860074ECFE /* Detail.storyboard */; };
 		8CB922FF297456000059DBD2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB922FE297456000059DBD2 /* SnapKit */; };
 		8CB92303297456A50059DBD2 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB92301297456A40059DBD2 /* WeatherCell.swift */; };
 		8CB92304297456A50059DBD2 /* WeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CB92302297456A50059DBD2 /* WeatherCell.xib */; };
@@ -37,7 +37,7 @@
 		8BB6539A40E37D9745691C26 /* Pods_WeatherApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB8D37C2986D6950074ECFE /* DetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVM.swift; sourceTree = "<group>"; };
 		8CB8D37E2986D6B00074ECFE /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
-		8CB8D3802986D6B90074ECFE /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
+		8CB8D382298EA0860074ECFE /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		8CB92301297456A40059DBD2 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		8CB92302297456A50059DBD2 /* WeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
 		8CC8C0DA29632DEA0090BED6 /* WeatherApi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,7 +77,7 @@
 			children = (
 				8CB8D37C2986D6950074ECFE /* DetailVM.swift */,
 				8CB8D37E2986D6B00074ECFE /* DetailVC.swift */,
-				8CB8D3802986D6B90074ECFE /* Detail.storyboard */,
+				8CB8D382298EA0860074ECFE /* Detail.storyboard */,
 			);
 			path = DetailVC;
 			sourceTree = "<group>";
@@ -113,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				8CC8C0F429632E040090BED6 /* Extension */,
+				8CC8C0F629632E3F0090BED6 /* Network */,
 				8CC8C0F329632DFF0090BED6 /* Commons */,
 				8CC8C0F229632DFB0090BED6 /* Model */,
 				8CC8C0F129632DF50090BED6 /* Scene */,
@@ -148,7 +149,6 @@
 				8CD318A1297E6866003CD937 /* CollectionViewCell */,
 				8CB92300297456840059DBD2 /* TableViewCell */,
 				8CC8C103296336B50090BED6 /* AppRouter */,
-				8CC8C0F629632E3F0090BED6 /* Network */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -286,7 +286,7 @@
 				8CC8C0E529632DEA0090BED6 /* Main.storyboard in Resources */,
 				8CB92304297456A50059DBD2 /* WeatherCell.xib in Resources */,
 				8CD318A5297E6885003CD937 /* WeatherCollectionViewCell.xib in Resources */,
-				8CB8D3812986D6B90074ECFE /* Detail.storyboard in Resources */,
+				8CB8D383298EA0860074ECFE /* Detail.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

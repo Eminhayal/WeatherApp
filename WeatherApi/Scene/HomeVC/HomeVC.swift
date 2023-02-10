@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class HomeVC: UIViewController  {
+    
     var viewModel = HomeVM()
     
     private lazy var tableView: UITableView = {
@@ -26,18 +27,20 @@ class HomeVC: UIViewController  {
     }
     
     private func SetupUI() {
-        viewModel.getServiceData()
+        viewModel.fetchData()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(WeatherCell.nibName, forCellReuseIdentifier: WeatherCell.identifier)
         viewModel.delegate = self
+        layout()
+        setNavigation()
         view.backgroundColor = .darkGray
+    }
+    
+    private func setNavigation() {
         navigationItem.title = "Weather"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        layout()
-        
     }
     
     private func layout() {
@@ -98,7 +101,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         if let timeline = data.data?.timelines {
             cell.configureData(data: timeline)
         }
-        cell.locationNameLabel.text = viewModel.locationName[indexPath.row]
+        cell.locationNameCityLabel.text = viewModel.nameCities[indexPath.row]
         return cell
     }
     
@@ -106,9 +109,4 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         let data = viewModel.weatherData
         AppRouter.shared.showDetailPage(self.navigationController, weatherData: data[indexPath.row])
     }
-}
-
-
-extension HomeVC: StoryboardInstantiate {
-    static var storyboardType: StoryboardType { return .home }
 }

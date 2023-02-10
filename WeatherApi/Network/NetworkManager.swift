@@ -32,3 +32,31 @@ final class NetworkManager {
         task.resume()
     }
 }
+
+public extension URLComponents {
+    
+    init(scheme: String = "https",
+         host: String = "api.myapp.com",
+         path: String,
+         queryItems: [URLQueryItem]? = nil) {
+        
+        var components = URLComponents()
+        components.scheme = scheme
+        components.path = path
+        components.host = host
+        components.queryItems = queryItems
+        self = components
+    }
+}
+
+extension URLComponents {
+    
+    static var users: Self {
+        Self(path: "/users")
+    }
+    
+    static func userDetail(id: String) -> Self {
+        let queryItems: [URLQueryItem] = [.init(name: "id", value: id)]
+        return Self(path: "/user", queryItems: queryItems)
+    }
+}

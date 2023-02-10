@@ -17,17 +17,17 @@ class WeatherCell: UITableViewCell {
     
     lazy var temperatureLabel: UILabel = {
        let temperatureLabel = UILabel()
-        temperatureLabel.font = UIFont(name: locationNameLabel.font.fontName, size: 30)
+        temperatureLabel.font = UIFont(name: temperatureLabel.font.fontName, size: 30)
        return temperatureLabel
    }()
     lazy var clockLabel: UILabel = {
        let clockLabel = UILabel()
        return clockLabel
    }()
-    lazy var locationNameLabel: UILabel = {
-       let locationNameLabel = UILabel()
-        locationNameLabel.font = UIFont(name: locationNameLabel.font.fontName, size: 24)
-       return locationNameLabel
+    lazy var locationNameCityLabel: UILabel = {
+       let locationNameCityLabel = UILabel()
+        locationNameCityLabel.font = UIFont(name: locationNameCityLabel.font.fontName, size: 24)
+       return locationNameCityLabel
    }()
     
     
@@ -109,23 +109,23 @@ class WeatherCell: UITableViewCell {
         }
         
         //MARK: TimeStep
-       self.locationNameLabel.addSubview(timeStepLabel)
+       self.locationNameCityLabel.addSubview(timeStepLabel)
         timeStepLabel.snp.makeConstraints { make in
-            make.top.equalTo(locationNameLabel.snp.top).offset(5)
-            make.left.equalTo(locationNameLabel.snp.right).offset(20)
+            make.top.equalTo(locationNameCityLabel.snp.top).offset(5)
+            make.left.equalTo(locationNameCityLabel.snp.right).offset(20)
         }
         
         //MARK: LocationName
-       self.contentView.addSubview(locationNameLabel)
-        locationNameLabel.snp.makeConstraints { make in
+       self.contentView.addSubview(locationNameCityLabel)
+        locationNameCityLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(50)
         }
         
         //MARK: Clock
-        self.locationNameLabel.addSubview(clockLabel)
+        self.locationNameCityLabel.addSubview(clockLabel)
          clockLabel.snp.makeConstraints { make in
-             make.top.equalTo(locationNameLabel.snp.bottom).offset(20)
+             make.top.equalTo(locationNameCityLabel.snp.bottom).offset(20)
          }
     }
     
