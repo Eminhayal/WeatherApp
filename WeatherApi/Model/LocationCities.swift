@@ -7,8 +7,7 @@
 
 import Foundation
 
-
-struct LocationCities : Codable {
+struct LocationCities: Codable {
     let name: String
     let lastName: String
     let age: Int

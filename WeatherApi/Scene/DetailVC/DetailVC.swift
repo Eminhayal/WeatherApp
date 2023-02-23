@@ -29,11 +29,9 @@ class DetailVC: UIViewController {
         super.viewDidLoad()
         configureData()
         layout()
-        DetailVC.instantiate()
     }
     
     func configureData() {
-        
         
         var data = weatherData?.data?.timelines?.first
         if let dataWeather =  data?.intervals?.first?.values?.temperature {
@@ -57,4 +55,3 @@ class DetailVC: UIViewController {
     }
     
 }
-

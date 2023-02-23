@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeVC: UIViewController  {
+class HomeVC: UIViewController {
     
     var viewModel = HomeVM()
     
@@ -23,10 +23,10 @@ class HomeVC: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SetupUI()
+        setupUI()
     }
-    
-    private func SetupUI() {
+
+    private func setupUI() {
         viewModel.fetchData()
         tableView.delegate = self
         tableView.dataSource = self
@@ -59,7 +59,7 @@ class HomeVC: UIViewController  {
 extension HomeVC: HomeFlowVMDelegateOutputs {
     func handleViewModelOutputs(_ viewModelOutputs: HomeFlowVMOutputs) {
         switch viewModelOutputs {
-        case .Succes:
+        case .succes:
             tableView.reloadData()
         case .error(let string):
             DispatchQueue.main.async { [weak self] in
@@ -94,15 +94,15 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: WeatherCell.identifier, for: indexPath) as! WeatherCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: WeatherCell.identifier, for: indexPath) as? WeatherCell
         let data = viewModel.weatherData[indexPath.row]
-        cell.weatherData = data.data?.timelines
-        cell.contentView.backgroundColor = .gray
+        cell?.weatherData = data.data?.timelines
+        cell?.contentView.backgroundColor = .gray
         if let timeline = data.data?.timelines {
-            cell.configureData(data: timeline)
+            cell?.configureData(data: timeline)
         }
-        cell.locationNameCityLabel.text = viewModel.nameCities[indexPath.row]
-        return cell
+        cell?.locationNameCityLabel.text = viewModel.nameCities[indexPath.row]
+        return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

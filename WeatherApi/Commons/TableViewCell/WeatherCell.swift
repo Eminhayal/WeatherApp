@@ -30,7 +30,6 @@ class WeatherCell: UITableViewCell {
        return locationNameCityLabel
    }()
     
-    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -40,7 +39,6 @@ class WeatherCell: UITableViewCell {
         return collectionView
         }()
     
-
     let myLabel: UILabel = {
         let myWeatherLabel = UILabel()
         myWeatherLabel.textColor = .white
@@ -56,7 +54,6 @@ class WeatherCell: UITableViewCell {
     let date = Date()
     let calendar = Calendar.current
 
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.delegate = self
@@ -93,7 +90,8 @@ class WeatherCell: UITableViewCell {
     }
     
     private func layout() {
-        //MARK: collectionview
+        
+        // MARK: collectionview
         contentView.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.width.equalToSuperview()
@@ -101,28 +99,29 @@ class WeatherCell: UITableViewCell {
             make.bottom.equalToSuperview().offset(-10)
             make.height.equalTo(50)
         }
-        //MARK: Temperature
+        
+        // MARK: Temperature
         self.contentView.addSubview(temperatureLabel)
         temperatureLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-20)
             make.top.equalToSuperview().offset(50)
         }
         
-        //MARK: TimeStep
+        // MARK: TimeStep
        self.locationNameCityLabel.addSubview(timeStepLabel)
         timeStepLabel.snp.makeConstraints { make in
             make.top.equalTo(locationNameCityLabel.snp.top).offset(5)
             make.left.equalTo(locationNameCityLabel.snp.right).offset(20)
         }
         
-        //MARK: LocationName
+        // MARK: LocationName
        self.contentView.addSubview(locationNameCityLabel)
         locationNameCityLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(50)
         }
         
-        //MARK: Clock
+        // MARK: Clock
         self.locationNameCityLabel.addSubview(clockLabel)
          clockLabel.snp.makeConstraints { make in
              make.top.equalTo(locationNameCityLabel.snp.bottom).offset(20)
@@ -146,23 +145,22 @@ extension WeatherCell: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.identifier, for: indexPath) as! WeatherCollectionViewCell
-        cell.backgroundColor = .clear
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.identifier, for: indexPath) as? WeatherCollectionViewCell
+        cell?.backgroundColor = .clear
         
         if let data = weatherInterval {
             if let tempData = data[indexPath.row].values?.temperature {
                 let tempValue = Int(tempData)
-                cell.tempLabel.text = "\(tempData.rounded()) °C  "
+                cell?.tempLabel.text = "\(tempData.rounded()) °C  "
 
             }
-            cell.timeLabel.text = weatherInterval?[indexPath.row].startTime
+            cell?.timeLabel.text = weatherInterval?[indexPath.row].startTime
             if let interval = weatherInterval {
-                cell.configureData(tempData: interval[indexPath.row])
+                cell?.configureData(tempData: interval[indexPath.row])
             }
         }
-        return cell
+        return cell ?? UICollectionViewCell()
     }
-    
     
 }
 

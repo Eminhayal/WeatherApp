@@ -26,6 +26,7 @@
 		8CC8C1022963363D0090BED6 /* StoryboardInstantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8C1012963363D0090BED6 /* StoryboardInstantiate.swift */; };
 		8CC8C105296336C00090BED6 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8C104296336C00090BED6 /* AppRouter.swift */; };
 		8CC8C10929673C620090BED6 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8C10829673C620090BED6 /* Weather.swift */; };
+		8CC8D84429A695B400390C0E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8CC8D84329A695B400390C0E /* .swiftlint.yml */; };
 		8CD318A4297E6885003CD937 /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD318A2297E6885003CD937 /* WeatherCollectionViewCell.swift */; };
 		8CD318A5297E6885003CD937 /* WeatherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CD318A3297E6885003CD937 /* WeatherCollectionViewCell.xib */; };
 		A1CAF6DF988D29DEE15D351B /* Pods_WeatherApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB6539A40E37D9745691C26 /* Pods_WeatherApi.framework */; };
@@ -55,6 +56,7 @@
 		8CC8C1012963363D0090BED6 /* StoryboardInstantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiate.swift; sourceTree = "<group>"; };
 		8CC8C104296336C00090BED6 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		8CC8C10829673C620090BED6 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		8CC8D84329A695B400390C0E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8CD318A2297E6885003CD937 /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		8CD318A3297E6885003CD937 /* WeatherCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 		8CC8C0D129632DEA0090BED6 = {
 			isa = PBXGroup;
 			children = (
+				8CC8D84329A695B400390C0E /* .swiftlint.yml */,
 				8CC8C0DC29632DEA0090BED6 /* WeatherApi */,
 				8CC8C0DB29632DEA0090BED6 /* Products */,
 				92FC5943F8E87E84C6336557 /* Pods */,
@@ -227,6 +230,7 @@
 				8CC8C0D729632DEA0090BED6 /* Frameworks */,
 				8CC8C0D829632DEA0090BED6 /* Resources */,
 				7F73C83097A407841BD47EDE /* [CP] Embed Pods Frameworks */,
+				8CC8D84229A688ED00390C0E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -284,6 +288,7 @@
 				8CC8C0EA29632DEB0090BED6 /* LaunchScreen.storyboard in Resources */,
 				8CC8C0E729632DEB0090BED6 /* Assets.xcassets in Resources */,
 				8CC8C0E529632DEA0090BED6 /* Main.storyboard in Resources */,
+				8CC8D84429A695B400390C0E /* .swiftlint.yml in Resources */,
 				8CB92304297456A50059DBD2 /* WeatherCell.xib in Resources */,
 				8CD318A5297E6885003CD937 /* WeatherCollectionViewCell.xib in Resources */,
 				8CB8D383298EA0860074ECFE /* Detail.storyboard in Resources */,
@@ -309,6 +314,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WeatherApi/Pods-WeatherApi-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		8CC8D84229A688ED00390C0E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n\n";
 		};
 		A89C1053D5FD4D568A9D7C1B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

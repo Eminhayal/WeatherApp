@@ -25,7 +25,6 @@ class WeatherCollectionViewCell: UICollectionViewCell {
 
     
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.layer.cornerRadius = 12
@@ -43,17 +42,15 @@ class WeatherCollectionViewCell: UICollectionViewCell {
 
         }
     }
-    
     func layout() {
         
-        //MARK: Time
+        // MARK: Time
         contentView.addSubview(timeLabel)
         timeLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.trailing.leading.equalToSuperview()
         }
-        
-        //MARK: Temp
+        // MARK: Temp
         contentView.addSubview(tempLabel)
         tempLabel.snp.makeConstraints { make in
 //            make.edges.equalToSuperview().offset(10)
@@ -69,7 +66,6 @@ extension WeatherCollectionViewCell {
     static var identifier: String {
         return String(describing: self)
     }
-    
     static var nibName: UINib {
         return UINib(nibName: identifier, bundle: nil)
     }

@@ -53,7 +53,6 @@ extension UIViewController: StoryboardSettings {
         }
     }
     
-    
 }
 
 public extension UIViewController {

@@ -2,19 +2,23 @@ PODS:
   - Bagel (1.3.2):
     - CocoaAsyncSocket
   - CocoaAsyncSocket (7.6.5)
+  - SwiftLint (0.50.3)
 
 DEPENDENCIES:
   - Bagel (~> 1.3.2)
+  - SwiftLint (~> 0.50)
 
 SPEC REPOS:
   trunk:
     - Bagel
     - CocoaAsyncSocket
+    - SwiftLint
 
 SPEC CHECKSUMS:
   Bagel: 199e0105ac694d6eee9db54dd006c940da6ce81b
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
 
-PODFILE CHECKSUM: 2382ec42c08d2f0546262cc54bdc550e33e1ea4c
+PODFILE CHECKSUM: 287221b0a63cdafbcd01c372ed9650e6a8464ab2
 
 COCOAPODS: 1.11.3

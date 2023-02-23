@@ -7,6 +7,6 @@ target 'WeatherApi' do
 
   # Pods for WeatherApi
 
+  pod 'SwiftLint', '~> 0.50'
   pod 'Bagel', '~>  1.3.2'
-  pod 'SwiftLint'
 end

@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 let network = NetworkManager()
 
 final class NetworkManager {
