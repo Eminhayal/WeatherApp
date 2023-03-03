@@ -13,49 +13,36 @@ final class NetworkManager {
     
     init() { }
     
-    func getData<T: Codable>(url: String, completion: @escaping (T?, String?) -> Void) {
-        let preparedURL = URL(string: url)
-        //start
-        let task = URLSession.shared.dataTask(with: preparedURL!) { (data, res, error) in
-            DispatchQueue.main.async {
-                if let data = data {
-                    do {
-                        let responseObject = try JSONDecoder().decode(T.self, from: data)
-                        completion(responseObject, nil)
-                    }catch{
-                        print("Empty Data ", error, error.localizedDescription)
+    func request<T: Codable>(type: T.Type, url: String, method: HTTPMethods, completion: @escaping((Result<T, ErrorTypes>) -> (Void))) {
+        let session = URLSession.shared
+        if let url = URL(string: url) {
+            var request = URLRequest(url: url)
+            request.httpMethod = method.rawValue
+            
+            let dataTask = session.dataTask(with: request) { data, response, error in
+                DispatchQueue.main.async {
+                    if let _ = error {
+                        completion(.failure(.requestFailed))
+                    } else if let data = data {
+                        self.handleResponse(data: data) { response in
+                             completion(response)
+                        }
+                    } else {
+                        completion(.failure(.badURL))
                     }
                 }
+              
             }
+            dataTask.resume()
         }
-        task.resume()
-    }
-}
-
-public extension URLComponents {
-    
-    init(scheme: String = "https",
-         host: String = "api.myapp.com",
-         path: String,
-         queryItems: [URLQueryItem]? = nil) {
-        
-        var components = URLComponents()
-        components.scheme = scheme
-        components.path = path
-        components.host = host
-        components.queryItems = queryItems
-        self = components
-    }
-}
-
-extension URLComponents {
-    
-    static var users: Self {
-        Self(path: "/users")
     }
     
-    static func userDetail(id: String) -> Self {
-        let queryItems: [URLQueryItem] = [.init(name: "id", value: id)]
-        return Self(path: "/user", queryItems: queryItems)
+    fileprivate func handleResponse<T: Codable>(data: Data, completion: @escaping((Result<T, ErrorTypes>) -> (Void))) {
+        do {
+            let result = try JSONDecoder().decode(T.self, from: data)
+            completion(.success(result))
+        } catch {
+            completion(.failure(.invalidData))
+        }
     }
 }

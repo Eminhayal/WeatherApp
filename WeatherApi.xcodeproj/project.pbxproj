@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5EB0A06829B28E0000E2DB1A /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0A06729B28E0000E2DB1A /* NetworkHelper.swift */; };
+		5EB0A06B29B28E4F00E2DB1A /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0A06A29B28E4F00E2DB1A /* RequestManager.swift */; };
 		8CB8D37D2986D6950074ECFE /* DetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8D37C2986D6950074ECFE /* DetailVM.swift */; };
 		8CB8D37F2986D6B00074ECFE /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8D37E2986D6B00074ECFE /* DetailVC.swift */; };
 		8CB8D383298EA0860074ECFE /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CB8D382298EA0860074ECFE /* Detail.storyboard */; };
@@ -19,9 +21,7 @@
 		8CC8C0E529632DEA0090BED6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CC8C0E329632DEA0090BED6 /* Main.storyboard */; };
 		8CC8C0E729632DEB0090BED6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CC8C0E629632DEB0090BED6 /* Assets.xcassets */; };
 		8CC8C0EA29632DEB0090BED6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CC8C0E829632DEB0090BED6 /* LaunchScreen.storyboard */; };
-		8CC8C0F829632E480090BED6 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8C0F729632E480090BED6 /* Network.swift */; };
 		8CC8C0FA29632E500090BED6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8C0F929632E500090BED6 /* NetworkManager.swift */; };
-		8CC8C0FC29632E840090BED6 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8C0FB29632E840090BED6 /* Api.swift */; };
 		8CC8C10029632F7D0090BED6 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8C0FF29632F7D0090BED6 /* HomeVM.swift */; };
 		8CC8C1022963363D0090BED6 /* StoryboardInstantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8C1012963363D0090BED6 /* StoryboardInstantiate.swift */; };
 		8CC8C105296336C00090BED6 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8C104296336C00090BED6 /* AppRouter.swift */; };
@@ -35,6 +35,8 @@
 /* Begin PBXFileReference section */
 		08DD604D15054674248FB762 /* Pods-WeatherApi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApi.debug.xcconfig"; path = "Target Support Files/Pods-WeatherApi/Pods-WeatherApi.debug.xcconfig"; sourceTree = "<group>"; };
 		243C0018324796B54F3B8C98 /* Pods-WeatherApi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApi.release.xcconfig"; path = "Target Support Files/Pods-WeatherApi/Pods-WeatherApi.release.xcconfig"; sourceTree = "<group>"; };
+		5EB0A06729B28E0000E2DB1A /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		5EB0A06A29B28E4F00E2DB1A /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		8BB6539A40E37D9745691C26 /* Pods_WeatherApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB8D37C2986D6950074ECFE /* DetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVM.swift; sourceTree = "<group>"; };
 		8CB8D37E2986D6B00074ECFE /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
@@ -49,9 +51,7 @@
 		8CC8C0E629632DEB0090BED6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8CC8C0E929632DEB0090BED6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8CC8C0EB29632DEB0090BED6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8CC8C0F729632E480090BED6 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		8CC8C0F929632E500090BED6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		8CC8C0FB29632E840090BED6 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		8CC8C0FF29632F7D0090BED6 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		8CC8C1012963363D0090BED6 /* StoryboardInstantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiate.swift; sourceTree = "<group>"; };
 		8CC8C104296336C00090BED6 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
@@ -177,9 +177,9 @@
 		8CC8C0F629632E3F0090BED6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				8CC8C0F729632E480090BED6 /* Network.swift */,
 				8CC8C0F929632E500090BED6 /* NetworkManager.swift */,
-				8CC8C0FB29632E840090BED6 /* Api.swift */,
+				5EB0A06729B28E0000E2DB1A /* NetworkHelper.swift */,
+				5EB0A06A29B28E4F00E2DB1A /* RequestManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -361,7 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CC8C0FC29632E840090BED6 /* Api.swift in Sources */,
+				5EB0A06829B28E0000E2DB1A /* NetworkHelper.swift in Sources */,
 				8CC8C0E229632DEA0090BED6 /* HomeVC.swift in Sources */,
 				8CB8D37D2986D6950074ECFE /* DetailVM.swift in Sources */,
 				8CC8C0DE29632DEA0090BED6 /* AppDelegate.swift in Sources */,
@@ -371,8 +371,8 @@
 				8CC8C0FA29632E500090BED6 /* NetworkManager.swift in Sources */,
 				8CC8C1022963363D0090BED6 /* StoryboardInstantiate.swift in Sources */,
 				8CB92303297456A50059DBD2 /* WeatherCell.swift in Sources */,
-				8CC8C0F829632E480090BED6 /* Network.swift in Sources */,
 				8CC8C0E029632DEA0090BED6 /* SceneDelegate.swift in Sources */,
+				5EB0A06B29B28E4F00E2DB1A /* RequestManager.swift in Sources */,
 				8CD318A4297E6885003CD937 /* WeatherCollectionViewCell.swift in Sources */,
 				8CC8C105296336C00090BED6 /* AppRouter.swift in Sources */,
 			);

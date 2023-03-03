@@ -27,7 +27,14 @@ class HomeVC: UIViewController {
     }
 
     private func setupUI() {
-        viewModel.fetchData()
+        viewModel.fetchData { errorMessage in
+            if let errorMessage = errorMessage {
+                print("error:\(errorMessage)")
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(WeatherCell.nibName, forCellReuseIdentifier: WeatherCell.identifier)
@@ -59,13 +66,15 @@ class HomeVC: UIViewController {
 extension HomeVC: HomeFlowVMDelegateOutputs {
     func handleViewModelOutputs(_ viewModelOutputs: HomeFlowVMOutputs) {
         switch viewModelOutputs {
-        case .succes:
-            tableView.reloadData()
         case .error(let string):
             DispatchQueue.main.async { [weak self] in
                 self?.setAlert(msg: string)
             }
             
+        case .setLoading(_):
+            break
+        case .showWeatherList(_):
+            break
         }
     }
     

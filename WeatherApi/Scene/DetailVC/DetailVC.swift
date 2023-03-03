@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class DetailVC: UIViewController {
+class DetailVC: UIViewController, StoryboardSettings {
     
     var viewModel: DetailVM?
     
@@ -33,9 +33,9 @@ class DetailVC: UIViewController {
     
     func configureData() {
         
-        var data = weatherData?.data?.timelines?.first
+        let data = weatherData?.data?.timelines?.first
         if let dataWeather =  data?.intervals?.first?.values?.temperature {
-            var dataInt = Int( dataWeather)
+            let dataInt = Int( dataWeather)
             temperatureLabel.text = "\(dataInt)"
         }
 

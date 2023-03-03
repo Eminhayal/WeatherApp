@@ -12,7 +12,7 @@ final class AppRouter {
     init() {}
      
     func showDetailPage(_ navigationController: UINavigationController?, weatherData: Weather) {
-        let detailVC = DetailVC.instantiate()
+        let detailVC = DetailVC.instantiate(name: .detail)
         let detailVM = DetailVM()
         detailVC.weatherData = weatherData
         detailVC.viewModel = detailVM
