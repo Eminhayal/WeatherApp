@@ -12,6 +12,7 @@ protocol HomeVCProtocol: AnyObject {
     var isDragging: Bool { get }
     func prepareTableView()
     func prepareRefreshController(tintColor: String)
+    func setupUI()
     func beginRefreshing()
     func endRefreshing()
     func reloadData()
@@ -45,13 +46,7 @@ class HomeVC: UIViewController, StoryboardSettings {
         viewModel.viewWillAppear()
     }
 
-    private func setupUI() {
-        viewModel.view?.setLayout()
-        viewModel.view?.setNavigation()
-        viewModel.view?.setColor()
-        
-    }
-    
+
     @objc func pulledRefreshController(_ sender: AnyObject) {
         viewModel.pulledRefreshController()
     }
@@ -88,6 +83,12 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
 extension HomeVC: HomeVCProtocol {
     
     var isDragging: Bool { tableView.isDragging }
+    
+    func setupUI() {
+        viewModel.view?.setLayout()
+        viewModel.view?.setNavigation()
+        viewModel.view?.setColor()
+    }
 
     func setLayout() {
         view.addSubview(tableView)

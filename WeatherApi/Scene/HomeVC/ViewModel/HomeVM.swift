@@ -20,6 +20,7 @@ protocol HomeFlowVMProtocol {
     func pulledRefreshController()
     func didSelectRowAt(at indexPath: IndexPath)
     func fetchData(complete: @escaping((String?) -> (Void)))
+    func setupUI()
 }
 
 final class HomeVM {
@@ -62,6 +63,10 @@ extension HomeVM: HomeFlowVMProtocol {
     
     func viewWillAppear() {
         view?.prepareRefreshController(tintColor: "red")
+    }
+    
+    func setupUI() {
+        view?.setupUI()
     }
     
     func pulledRefreshController() {
