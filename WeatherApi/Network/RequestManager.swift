@@ -7,9 +7,13 @@
 
 import Foundation
 
-class RequestManager {
+protocol WeatherManagerProtocol {
+    func getWeatherItems(url: String, complete: @escaping((Weather?, String?) -> (Void)))
+}
+
+class WeatherNetworkManager: WeatherManagerProtocol {
     
-    static let shared = RequestManager()
+    static let shared = WeatherNetworkManager()
     
     func getWeatherItems(url: String, complete: @escaping((Weather?, String?) -> (Void))) {
         

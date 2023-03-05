@@ -8,8 +8,20 @@
 import UIKit
 import SnapKit
 
-class HomeVC: UIViewController {
-    
+protocol HomeVCProtocol: AnyObject {
+    var isDragging: Bool { get }
+    func prepareTableView()
+    func prepareRefreshController(tintColor: String)
+    func beginRefreshing()
+    func endRefreshing()
+    func reloadData()
+    func setAlert(msg: String)
+    func setLayout()
+    func setNavigation()
+    func setColor()
+}
+
+class HomeVC: UIViewController, StoryboardSettings {
     var viewModel = HomeVM()
     
     private lazy var tableView: UITableView = {
@@ -23,76 +35,30 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.view = self
+        viewModel.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewWillAppear()
     }
 
     private func setupUI() {
-        viewModel.fetchData { errorMessage in
-            if let errorMessage = errorMessage {
-                print("error:\(errorMessage)")
-            }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(WeatherCell.nibName, forCellReuseIdentifier: WeatherCell.identifier)
-        viewModel.delegate = self
-        layout()
-        setNavigation()
-        view.backgroundColor = .darkGray
-    }
-    
-    private func setNavigation() {
-        navigationItem.title = "Weather"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    private func layout() {
-        
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-10)
-            make.bottom.equalToSuperview().offset(-30)
-            make.top.equalToSuperview().offset(80)
-            make.leading.equalToSuperview().offset(10)
-            
-        }
-    }
-}
-
-extension HomeVC: HomeFlowVMDelegateOutputs {
-    func handleViewModelOutputs(_ viewModelOutputs: HomeFlowVMOutputs) {
-        switch viewModelOutputs {
-        case .error(let string):
-            DispatchQueue.main.async { [weak self] in
-                self?.setAlert(msg: string)
-            }
-            
-        case .setLoading(_):
-            break
-        case .showWeatherList(_):
-            break
-        }
-    }
-    
-    func setAlert(msg: String) {
-        let alert = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
-        DispatchQueue.main.async { [weak self] in
-            self?.present(alert, animated: true, completion: nil)
-        }
+        viewModel.view?.setLayout()
+        viewModel.view?.setNavigation()
+        viewModel.view?.setColor()
         
     }
     
+    @objc func pulledRefreshController(_ sender: AnyObject) {
+        viewModel.pulledRefreshController()
+    }
 }
 
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.weatherData.count
         
@@ -115,7 +81,66 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let data = viewModel.weatherData
-        AppRouter.shared.showDetailPage(self.navigationController, weatherData: data[indexPath.row])
+        viewModel.didSelectRowAt(at: indexPath)
+    }
+}
+
+extension HomeVC: HomeVCProtocol {
+    
+    var isDragging: Bool { tableView.isDragging }
+
+    func setLayout() {
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-30)
+            make.top.equalToSuperview().offset(80)
+            make.leading.equalToSuperview().offset(10)
+        }
+    }
+    
+    func setColor() {
+        view.backgroundColor = .darkGray
+    }
+    
+    func setNavigation() {
+        navigationItem.title = "Weather"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    func beginRefreshing() {
+        tableView.refreshControl?.beginRefreshing()
+    }
+    
+    func endRefreshing() {
+        tableView.refreshControl?.endRefreshing()
+    }
+    
+    func reloadData() {
+        tableView.reloadData()
+    }
+       
+    func prepareTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(WeatherCell.nibName, forCellReuseIdentifier: WeatherCell.identifier)
+    }
+    
+    func prepareRefreshController(tintColor: String) {
+        let refreshController = UIRefreshControl()
+        refreshController.addTarget(self, action: #selector(pulledRefreshController), for: .valueChanged)
+        refreshController.tintColor = .init(named: tintColor)
+        tableView.refreshControl = refreshController
+    }
+    
+    func setAlert(msg: String) {
+        let alert = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        DispatchQueue.main.async { [weak self] in
+            self?.present(alert, animated: true, completion: nil)
+        }
     }
 }
