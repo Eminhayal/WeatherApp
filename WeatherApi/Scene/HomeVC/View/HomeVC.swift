@@ -10,6 +10,7 @@ import SnapKit
 
 protocol HomeVCProtocol: AnyObject {
     var isDragging: Bool { get }
+    
     func prepareTableView()
     func prepareRefreshController(tintColor: String)
     func setupUI()
@@ -40,13 +41,12 @@ class HomeVC: UIViewController, StoryboardSettings {
         viewModel.viewDidLoad()
         setupUI()
     }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.viewWillAppear()
     }
-
-
+    
     @objc func pulledRefreshController(_ sender: AnyObject) {
         viewModel.pulledRefreshController()
     }
@@ -111,6 +111,7 @@ extension HomeVC: HomeVCProtocol {
     }
     func beginRefreshing() {
         tableView.refreshControl?.beginRefreshing()
+        
     }
     
     func endRefreshing() {

@@ -43,7 +43,7 @@ class WeatherCell: UITableViewCell {
         let myWeatherLabel = UILabel()
         myWeatherLabel.textColor = .white
         myWeatherLabel.textAlignment = .center
-        myWeatherLabel.font = .systemFont(ofSize: 30, weight: .semibold) // set your font size here
+        myWeatherLabel.font = .systemFont(ofSize: 30, weight: .semibold)
         myWeatherLabel.translatesAutoresizingMaskIntoConstraints = false
         
         return myWeatherLabel

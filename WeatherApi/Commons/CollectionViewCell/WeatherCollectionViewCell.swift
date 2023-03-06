@@ -23,8 +23,6 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         return tempLabel
     }()
 
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.layer.cornerRadius = 12

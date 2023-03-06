@@ -12,7 +12,7 @@ protocol HomeFlowVMProtocol {
     // MARK: Variable
     var weatherData: [Weather] { get set }
     var view: HomeVCProtocol? {get set}
-
+    
     // MARK: Func
     func viewDidLoad()
     func viewWillAppear()
@@ -33,19 +33,21 @@ final class HomeVM {
     
     func fetchData(complete: @escaping((String?) -> (Void))) {
         view?.beginRefreshing()
-        for citiesLongitudeLatitude in citiesLongitudeLatitude {
+        citiesLongitudeLatitude.forEach({ citiesLongitudeLatitude in
             let url = "https://api.tomorrow.io/v4/timelines?location=\(citiesLongitudeLatitude)&fields=temperature&units=metric&timesteps=1h&startTime=now&endTime=nowPlus6h&apikey=EFxtVbCYRGe1idawi0upNXptVTZz4vlW"
-           
-            WeatherNetworkManager.shared.getWeatherItems(url: url) { response, errorMessage in
+            
+            WeatherNetworkManager.shared.getWeatherItems(url: url) { [weak self] response, errorMessage in
                 if let response = response {
-                    self.weatherData.append(response)
-                    self.view?.endRefreshing()
-                    self.view?.reloadData()
+                    self?.weatherData.append(response)
+                    self?.view?.endRefreshing()
+                    self?.view?.reloadData()
                 }
                 complete(errorMessage)
             }
-        }
+        })
+        
     }
+    
 }
 
 extension HomeVM: HomeFlowVMProtocol {
@@ -71,6 +73,15 @@ extension HomeVM: HomeFlowVMProtocol {
     
     func pulledRefreshController() {
         guard let isDragging = view?.isDragging, !isDragging else {
+            weatherData = []
+            fetchData { errorMessage in
+                if let errorMessage = errorMessage {
+                    print("Error: \(errorMessage)")
+                    self.view?.setAlert(msg: errorMessage)
+                }
+                self.view?.reloadData()
+                self.view?.endRefreshing()
+            }
             pulledDownRefreshController = true
             return
         }
